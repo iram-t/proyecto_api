@@ -1,5 +1,15 @@
-import 'package:meta/meta.dart';
+// To parse this JSON data, do
+//
+//     final monstersResponse = monstersResponseFromJson(jsonString);
+
 import 'dart:convert';
+
+List<MonstersResponse> monstersResponseFromJson(String str) =>
+    List<MonstersResponse>.from(
+        json.decode(str).map((x) => MonstersResponse.fromJson(x)));
+
+String monstersResponseToJson(List<MonstersResponse> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MonstersResponse {
   int id;
@@ -27,11 +37,6 @@ class MonstersResponse {
     required this.weaknesses,
     required this.rewards,
   });
-
-  factory MonstersResponse.fromRawJson(String str) =>
-      MonstersResponse.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory MonstersResponse.fromJson(Map<String, dynamic> json) =>
       MonstersResponse(
@@ -85,10 +90,6 @@ class Ailment {
     required this.protection,
   });
 
-  factory Ailment.fromRawJson(String str) => Ailment.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Ailment.fromJson(Map<String, dynamic> json) => Ailment(
         id: json["id"],
         name: json["name"],
@@ -114,11 +115,6 @@ class Protection {
     required this.skills,
     required this.items,
   });
-
-  factory Protection.fromRawJson(String str) =>
-      Protection.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Protection.fromJson(Map<String, dynamic> json) => Protection(
         skills: List<Skill>.from(json["skills"].map((x) => Skill.fromJson(x))),
@@ -147,10 +143,6 @@ class Item {
     required this.name,
     required this.description,
   });
-
-  factory Item.fromRawJson(String str) => Item.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         id: json["id"],
@@ -182,10 +174,6 @@ class Skill {
     required this.description,
   });
 
-  factory Skill.fromRawJson(String str) => Skill.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Skill.fromJson(Map<String, dynamic> json) => Skill(
         id: json["id"],
         name: json["name"],
@@ -207,11 +195,6 @@ class Recovery {
     required this.actions,
     required this.items,
   });
-
-  factory Recovery.fromRawJson(String str) =>
-      Recovery.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Recovery.fromJson(Map<String, dynamic> json) => Recovery(
         actions:
@@ -267,11 +250,6 @@ class Location {
     required this.name,
   });
 
-  factory Location.fromRawJson(String str) =>
-      Location.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Location.fromJson(Map<String, dynamic> json) => Location(
         id: json["id"],
         zoneCount: json["zoneCount"],
@@ -287,17 +265,12 @@ class Location {
 
 class Resistance {
   Element element;
-  String condition;
+  String? condition;
 
   Resistance({
     required this.element,
     required this.condition,
   });
-
-  factory Resistance.fromRawJson(String str) =>
-      Resistance.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Resistance.fromJson(Map<String, dynamic> json) => Resistance(
         element: elementValues.map[json["element"]]!,
@@ -321,10 +294,6 @@ class Reward {
     required this.conditions,
   });
 
-  factory Reward.fromRawJson(String str) => Reward.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Reward.fromJson(Map<String, dynamic> json) => Reward(
         id: json["id"],
         item: Item.fromJson(json["item"]),
@@ -344,7 +313,7 @@ class Condition {
   Rank rank;
   int quantity;
   int chance;
-  String subtype;
+  String? subtype;
 
   Condition({
     required this.type,
@@ -353,11 +322,6 @@ class Condition {
     required this.chance,
     required this.subtype,
   });
-
-  factory Condition.fromRawJson(String str) =>
-      Condition.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Condition.fromJson(Map<String, dynamic> json) => Condition(
         type: conditionTypeValues.map[json["type"]]!,
@@ -410,18 +374,13 @@ final monstersResponseTypeValues = EnumValues(
 class Weakness {
   Element element;
   int stars;
-  String condition;
+  String? condition;
 
   Weakness({
     required this.element,
     required this.stars,
     required this.condition,
   });
-
-  factory Weakness.fromRawJson(String str) =>
-      Weakness.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Weakness.fromJson(Map<String, dynamic> json) => Weakness(
         element: elementValues.map[json["element"]]!,

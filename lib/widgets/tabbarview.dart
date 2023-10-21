@@ -39,7 +39,7 @@ class _TabBarHomeState extends State<TabBarHome> {
           ),
           body: TabBarView(
             children: [
-              Center(child: ListViewMain()),
+              // Center(child: postMnt.loading ? Center())),
               Center(child: ListViewMain()),
               Center(child: ListViewMain()),
             ],

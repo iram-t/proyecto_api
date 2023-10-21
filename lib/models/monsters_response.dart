@@ -7,9 +7,9 @@ import 'dart:convert';
 List<MonstersResponse> monstersResponseFromJson(String str) =>
     List<MonstersResponse>.from(
         json.decode(str).map((x) => MonstersResponse.fromJson(x)));
-
+/*
 String monstersResponseToJson(List<MonstersResponse> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));*/
 
 class MonstersResponse {
   int id;
@@ -59,7 +59,7 @@ class MonstersResponse {
             List<Reward>.from(json["rewards"].map((x) => Reward.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
+  /*Map<String, dynamic> toJson() => {
         "id": id,
         "type": monstersResponseTypeValues.reverse[type],
         "species": species,
@@ -72,7 +72,7 @@ class MonstersResponse {
         "resistances": List<dynamic>.from(resistances.map((x) => x.toJson())),
         "weaknesses": List<dynamic>.from(weaknesses.map((x) => x.toJson())),
         "rewards": List<dynamic>.from(rewards.map((x) => x.toJson())),
-      };
+      };*/
 }
 
 class Ailment {
@@ -98,13 +98,13 @@ class Ailment {
         protection: Protection.fromJson(json["protection"]),
       );
 
-  Map<String, dynamic> toJson() => {
+  /*Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
         "recovery": recovery.toJson(),
         "protection": protection.toJson(),
-      };
+      };*/
 }
 
 class Protection {
@@ -121,10 +121,10 @@ class Protection {
         items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
+  /*Map<String, dynamic> toJson() => {
         "skills": List<dynamic>.from(skills.map((x) => x.toJson())),
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
-      };
+      };*/
 }
 
 class Item {
@@ -153,14 +153,14 @@ class Item {
         description: json["description"],
       );
 
-  Map<String, dynamic> toJson() => {
+  /* Map<String, dynamic> toJson() => {
         "id": id,
         "rarity": rarity,
         "value": value,
         "carryLimit": carryLimit,
         "name": name,
         "description": description,
-      };
+      };*/
 }
 
 class Skill {
@@ -180,11 +180,11 @@ class Skill {
         description: json["description"],
       );
 
-  Map<String, dynamic> toJson() => {
+  /* Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "description": description,
-      };
+      };*/
 }
 
 class Recovery {
@@ -202,11 +202,11 @@ class Recovery {
         items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
+  /* Map<String, dynamic> toJson() => {
         "actions":
             List<dynamic>.from(actions.map((x) => actionValues.reverse[x])),
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
-      };
+      };*/
 }
 
 enum Action { DODGE }
@@ -255,12 +255,12 @@ class Location {
         zoneCount: json["zoneCount"],
         name: json["name"],
       );
-
+/*
   Map<String, dynamic> toJson() => {
         "id": id,
         "zoneCount": zoneCount,
         "name": name,
-      };
+      };*/
 }
 
 class Resistance {
@@ -276,11 +276,11 @@ class Resistance {
         element: elementValues.map[json["element"]]!,
         condition: json["condition"],
       );
-
+/*
   Map<String, dynamic> toJson() => {
         "element": elementValues.reverse[element],
         "condition": condition,
-      };
+      };*/
 }
 
 class Reward {
@@ -300,12 +300,12 @@ class Reward {
         conditions: List<Condition>.from(
             json["conditions"].map((x) => Condition.fromJson(x))),
       );
-
+/*
   Map<String, dynamic> toJson() => {
         "id": id,
         "item": item.toJson(),
         "conditions": List<dynamic>.from(conditions.map((x) => x.toJson())),
-      };
+      };*/
 }
 
 class Condition {
@@ -330,14 +330,14 @@ class Condition {
         chance: json["chance"],
         subtype: json["subtype"],
       );
-
+/*
   Map<String, dynamic> toJson() => {
         "type": conditionTypeValues.reverse[type],
         "rank": rankValues.reverse[rank],
         "quantity": quantity,
         "chance": chance,
         "subtype": subtype,
-      };
+      };*/
 }
 
 enum Rank { HIGH, LOW }
@@ -387,12 +387,12 @@ class Weakness {
         stars: json["stars"],
         condition: json["condition"],
       );
-
+/*
   Map<String, dynamic> toJson() => {
         "element": elementValues.reverse[element],
         "stars": stars,
         "condition": condition,
-      };
+      };*/
 }
 
 class EnumValues<T> {

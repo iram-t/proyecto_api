@@ -1,12 +1,9 @@
-// To parse this JSON data, do
-//
-//     final monstersResponse = monstersResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 List<MonstersResponse> monstersResponseFromJson(String str) =>
     List<MonstersResponse>.from(
         json.decode(str).map((x) => MonstersResponse.fromJson(x)));
+
 /*
 String monstersResponseToJson(List<MonstersResponse> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));*/
@@ -37,6 +34,9 @@ class MonstersResponse {
     required this.weaknesses,
     required this.rewards,
   });
+
+  factory MonstersResponse.fromRawJson(String str) =>
+      MonstersResponse.fromJson(json.decode(str));
 
   factory MonstersResponse.fromJson(Map<String, dynamic> json) =>
       MonstersResponse(
@@ -105,6 +105,11 @@ class Ailment {
         "recovery": recovery.toJson(),
         "protection": protection.toJson(),
       };*/
+  @override
+  String toString() {
+    // Devuelve una cadena que representa la información de la instancia
+    return '{Id: $id, Name: $name, Description: $description, Recovery: $recovery, Protection: $protection}';
+  }
 }
 
 class Protection {
@@ -161,6 +166,11 @@ class Item {
         "name": name,
         "description": description,
       };*/
+  @override
+  String toString() {
+    // Devuelve una cadena que representa la información de la instancia
+    return '{Id: $id, Rarity: $rarity, Value: $value, Carry Limit: $carryLimit, Name: $name, Description: $description}';
+  }
 }
 
 class Skill {
@@ -393,6 +403,11 @@ class Weakness {
         "stars": stars,
         "condition": condition,
       };*/
+  @override
+  String toString() {
+    // Devuelve una cadena que representa la información de la instancia
+    return '{Element: $element, Stars: $stars, condition: $condition}';
+  }
 }
 
 class EnumValues<T> {

@@ -10,9 +10,7 @@ class DrawerHome extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(215, 123, 255, 1),
-            ),
+            decoration: BoxDecoration(color: Colors.blue),
             child: Text(
               'Home',
               style: TextStyle(

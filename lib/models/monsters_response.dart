@@ -195,6 +195,11 @@ class Skill {
         "name": name,
         "description": description,
       };*/
+  @override
+  String toString() {
+    // Devuelve una cadena que representa la información de la instancia
+    return '{Id: $id, name: $name, description: $description}';
+  }
 }
 
 class Recovery {
@@ -271,6 +276,11 @@ class Location {
         "zoneCount": zoneCount,
         "name": name,
       };*/
+  @override
+  String toString() {
+    // Devuelve una cadena que representa la información de la instancia
+    return '{Id: $id, zoneCount: $zoneCount, name: $name}';
+  }
 }
 
 class Resistance {

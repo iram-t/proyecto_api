@@ -22,32 +22,47 @@ class ListViewMain extends StatelessWidget {
           if (type == 'large' &&
               item.type == monstersResponseTypeValues.map['large'] &&
               item.species != 'elder dragon') {
-            return ListTile(
-              title: Text(item.name),
-              onTap: () => Navigator.pushNamed(
-                context,
-                'details',
-                arguments: arguments,
-              ),
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(item.name),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    'details',
+                    arguments: arguments,
+                  ),
+                ),
+                const Divider(height: 5, thickness: 1)
+              ],
             );
           } else if (type == 'small' &&
               item.type == monstersResponseTypeValues.map['small']) {
-            return ListTile(
-              title: Text(item.name),
-              onTap: () => Navigator.pushNamed(
-                context,
-                'details',
-                arguments: arguments,
-              ),
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(item.name),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    'details',
+                    arguments: arguments,
+                  ),
+                ),
+                const Divider(height: 5, thickness: 1)
+              ],
             );
           } else if (item.species == specie) {
-            return ListTile(
-              title: Text(item.name),
-              onTap: () => Navigator.pushNamed(
-                context,
-                'details',
-                arguments: arguments,
-              ),
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(item.name),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    'details',
+                    arguments: arguments,
+                  ),
+                ),
+                const Divider(height: 5, thickness: 1)
+              ],
             );
           } else {
             return Container();

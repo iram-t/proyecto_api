@@ -25,7 +25,6 @@ class DetailsScreen extends StatelessWidget {
         return 'assets/blast.png';
       case 'STUN':
         return 'assets/stun.png';
-      // Añadir más casos según sea necesario
       default:
         return 'assets/default.png'; // Imagen predeterminada para debilidades desconocidas
     }
@@ -44,9 +43,22 @@ class DetailsScreen extends StatelessWidget {
       appBar: AppBar(title: Text(monster[idMonster].name)),
       body: Column(
         children: [
-          Text(monster[idMonster].name),
-          Text(monster[idMonster].species),
-          Text(monster[idMonster].description),
+          Container(
+            margin: const EdgeInsets.only(top: 25),
+          ),
+          Text(
+            monster[idMonster].name,
+            style: const TextStyle(fontSize: 25),
+          ),
+          Text(
+            monster[idMonster].species,
+            style: const TextStyle(fontStyle: FontStyle.italic),
+          ),
+          const Divider(height: 40),
+          Center(
+            child: Text(monster[idMonster].description),
+          ),
+          const Divider(height: 40),
           Text(
             monster[idMonster]
                 .elements
@@ -55,6 +67,7 @@ class DetailsScreen extends StatelessWidget {
                 .replaceAll(']', '')
                 .replaceAll('Element.', ''),
           ),
+          const Divider(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -114,7 +127,20 @@ class DetailsScreen extends StatelessWidget {
                     : Container()
             ],
           ),
-          Text(monster[idMonster].locations.toString()),
+          const Divider(height: 40),
+          Column(
+            children: [
+              const Text('Locations:'),
+              for (var location in monster[idMonster].locations)
+                (location.name.isNotEmpty)
+                    ? Column(
+                        children: [Text(location.name)],
+                      )
+                    : const Column(
+                        children: [Text('No locations')],
+                      )
+            ],
+          ),
         ],
       ),
     );

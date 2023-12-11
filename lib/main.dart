@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:proyecto_api/screens/favorites.dart';
+import 'package:proyecto_api/utils/utils.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,12 +50,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: Utils.messengerKey,
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       title: 'Monster Hunter',
       initialRoute: 'mainpage',
       routes: {
         'home': (_) => const Home(),
+        'favorites': (_) => const Favorites(),
         'mainpage': (_) => const MainPage(),
         'details': (_) => const DetailsScreen(),
       },

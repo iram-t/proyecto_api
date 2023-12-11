@@ -11,7 +11,7 @@ class DrawerHome extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(color: Color.fromARGB(255, 71, 71, 71)),
             child: Text(
               'Home',
               style: TextStyle(
@@ -21,10 +21,9 @@ class DrawerHome extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.favorite),
-            title: const Text('Favorites'),
-            onTap: () {},
-          ),
+              leading: const Icon(Icons.favorite),
+              title: const Text('Favorites'),
+              onTap: () => Navigator.pushNamed(context, 'favorites')),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Cerrar sesión'),

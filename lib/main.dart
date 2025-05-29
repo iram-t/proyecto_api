@@ -1,27 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:proyecto_api/screens/favorites.dart';
 import 'package:proyecto_api/utils/utils.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_api/screens/screens.dart';
 import 'providers/monsters_provider.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  const keyApplicationId = 'RMRGzMA3nK90t2sF8L0HZdSXieDKZpkkrGUnKVjK';
-  const keyClientKey = 'FdmXzVDQ2LqHqtrtApVTUbUQQyy4jazmkGwHYFI5';
-  const keyParseServerUrl = 'https://parseapi.back4app.com';
-
-  await Parse().initialize(keyApplicationId, keyParseServerUrl,
-      clientKey: keyClientKey, autoSendSessionId: true);
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
   runApp(const AppState());
 }
 
@@ -55,33 +39,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       title: 'Monster Hunter',
-      initialRoute: 'mainpage',
+      initialRoute: 'home',
       routes: {
         'home': (_) => const Home(),
-        'favorites': (_) => const Favorites(),
-        'mainpage': (_) => const MainPage(),
         'details': (_) => const DetailsScreen(),
       },
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const VerifyEmailPage();
-          } else {
-            return const AuthPage();
-          }
-        },
-      ),
     );
   }
 }

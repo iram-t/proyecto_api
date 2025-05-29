@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_api/models/database/favorites_model.dart';
-import 'package:proyecto_api/models/response/monsters_response.dart';
+import 'package:proyecto_api/models/monsters_response.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -151,7 +150,6 @@ class DetailsScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(backgroundColor: Colors.black26),
               child: const Text('Eliminar de favoritos'),
               onPressed: () {
-                deleteFavorite(monster.id);
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
@@ -277,9 +275,7 @@ class DetailsScreen extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.black26),
               child: const Text('Añadir a favoritos'),
-              onPressed: () {
-                addFavorite(monster[idMonster].id);
-              },
+              onPressed: () {},
             ),
           ],
         ),

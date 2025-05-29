@@ -1,29 +1,183 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-class ArmorResponse {
+class ArmorsSetsResponse {
+  int id;
+  RankEnum rank;
+  String name;
+  List<Piece> pieces;
+  Bonus bonus;
+
+  ArmorsSetsResponse({
+    required this.id,
+    required this.rank,
+    required this.name,
+    required this.pieces,
+    required this.bonus,
+  });
+
+  factory ArmorsSetsResponse.fromRawJson(String str) =>
+      ArmorsSetsResponse.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory ArmorsSetsResponse.fromJson(Map<String, dynamic> json) =>
+      ArmorsSetsResponse(
+        id: json["id"],
+        rank: rankEnumValues.map[json["rank"]]!,
+        name: json["name"],
+        pieces: List<Piece>.from(json["pieces"].map((x) => Piece.fromJson(x))),
+        bonus: Bonus.fromJson(json["bonus"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "rank": rankEnumValues.reverse[rank],
+        "name": name,
+        "pieces": List<dynamic>.from(pieces.map((x) => x.toJson())),
+        "bonus": bonus.toJson(),
+      };
+}
+
+class Bonus {
+  int id;
+  String name;
+  List<RankElement> ranks;
+
+  Bonus({
+    required this.id,
+    required this.name,
+    required this.ranks,
+  });
+
+  factory Bonus.fromRawJson(String str) => Bonus.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Bonus.fromJson(Map<String, dynamic> json) => Bonus(
+        id: json["id"],
+        name: json["name"],
+        ranks: List<RankElement>.from(
+            json["ranks"].map((x) => RankElement.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "ranks": List<dynamic>.from(ranks.map((x) => x.toJson())),
+      };
+}
+
+class RankElement {
+  int pieces;
+  RankSkill skill;
+  String description;
+
+  RankElement({
+    required this.pieces,
+    required this.skill,
+    required this.description,
+  });
+
+  factory RankElement.fromRawJson(String str) =>
+      RankElement.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory RankElement.fromJson(Map<String, dynamic> json) => RankElement(
+        pieces: json["pieces"],
+        skill: RankSkill.fromJson(json["skill"]),
+        description: json["description"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "pieces": pieces,
+        "skill": skill.toJson(),
+        "description": description,
+      };
+}
+
+class RankSkill {
+  int id;
+  int level;
+  PurpleModifiers modifiers;
+  int skill;
+  String skillName;
+
+  RankSkill({
+    required this.id,
+    required this.level,
+    required this.modifiers,
+    required this.skill,
+    required this.skillName,
+  });
+
+  factory RankSkill.fromRawJson(String str) =>
+      RankSkill.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory RankSkill.fromJson(Map<String, dynamic> json) => RankSkill(
+        id: json["id"],
+        level: json["level"],
+        modifiers: PurpleModifiers.fromJson(json["modifiers"]),
+        skill: json["skill"],
+        skillName: json["skillName"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "level": level,
+        "modifiers": modifiers.toJson(),
+        "skill": skill,
+        "skillName": skillName,
+      };
+}
+
+class PurpleModifiers {
+  int affinity;
+
+  PurpleModifiers({
+    required this.affinity,
+  });
+
+  factory PurpleModifiers.fromRawJson(String str) =>
+      PurpleModifiers.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory PurpleModifiers.fromJson(Map<String, dynamic> json) =>
+      PurpleModifiers(
+        affinity: json["affinity"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "affinity": affinity,
+      };
+}
+
+class Piece {
   int id;
   Type type;
-  Rank rank;
+  RankEnum rank;
   int rarity;
+  Attributes attributes;
   Defense defense;
   Resistances resistances;
-  Attributes attributes;
   String name;
   List<Slot> slots;
-  List<Skill> skills;
-  ArmorSet armorSet;
+  List<SkillElement> skills;
+  int armorSet;
   Assets assets;
   Crafting crafting;
 
-  ArmorResponse({
+  Piece({
     required this.id,
     required this.type,
     required this.rank,
     required this.rarity,
+    required this.attributes,
     required this.defense,
     required this.resistances,
-    required this.attributes,
     required this.name,
     required this.slots,
     required this.skills,
@@ -32,23 +186,23 @@ class ArmorResponse {
     required this.crafting,
   });
 
-  factory ArmorResponse.fromRawJson(String str) =>
-      ArmorResponse.fromJson(json.decode(str));
+  factory Piece.fromRawJson(String str) => Piece.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory ArmorResponse.fromJson(Map<String, dynamic> json) => ArmorResponse(
+  factory Piece.fromJson(Map<String, dynamic> json) => Piece(
         id: json["id"],
         type: typeValues.map[json["type"]]!,
-        rank: rankValues.map[json["rank"]]!,
+        rank: rankEnumValues.map[json["rank"]]!,
         rarity: json["rarity"],
+        attributes: Attributes.fromJson(json["attributes"]),
         defense: Defense.fromJson(json["defense"]),
         resistances: Resistances.fromJson(json["resistances"]),
-        attributes: Attributes.fromJson(json["attributes"]),
         name: json["name"],
         slots: List<Slot>.from(json["slots"].map((x) => Slot.fromJson(x))),
-        skills: List<Skill>.from(json["skills"].map((x) => Skill.fromJson(x))),
-        armorSet: ArmorSet.fromJson(json["armorSet"]),
+        skills: List<SkillElement>.from(
+            json["skills"].map((x) => SkillElement.fromJson(x))),
+        armorSet: json["armorSet"],
         assets: Assets.fromJson(json["assets"]),
         crafting: Crafting.fromJson(json["crafting"]),
       );
@@ -56,61 +210,19 @@ class ArmorResponse {
   Map<String, dynamic> toJson() => {
         "id": id,
         "type": typeValues.reverse[type],
-        "rank": rankValues.reverse[rank],
+        "rank": rankEnumValues.reverse[rank],
         "rarity": rarity,
+        "attributes": attributes.toJson(),
         "defense": defense.toJson(),
         "resistances": resistances.toJson(),
-        "attributes": attributes.toJson(),
         "name": name,
         "slots": List<dynamic>.from(slots.map((x) => x.toJson())),
         "skills": List<dynamic>.from(skills.map((x) => x.toJson())),
-        "armorSet": armorSet.toJson(),
+        "armorSet": armorSet,
         "assets": assets.toJson(),
         "crafting": crafting.toJson(),
       };
 }
-
-class ArmorSet {
-  int id;
-  Rank rank;
-  String name;
-  List<int> pieces;
-  int bonus;
-
-  ArmorSet({
-    required this.id,
-    required this.rank,
-    required this.name,
-    required this.pieces,
-    required this.bonus,
-  });
-
-  factory ArmorSet.fromRawJson(String str) =>
-      ArmorSet.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory ArmorSet.fromJson(Map<String, dynamic> json) => ArmorSet(
-        id: json["id"],
-        rank: rankValues.map[json["rank"]]!,
-        name: json["name"],
-        pieces: List<int>.from(json["pieces"].map((x) => x)),
-        bonus: json["bonus"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "rank": rankValues.reverse[rank],
-        "name": name,
-        "pieces": List<dynamic>.from(pieces.map((x) => x)),
-        "bonus": bonus,
-      };
-}
-
-enum Rank { HIGH, LOW, MASTER }
-
-final rankValues =
-    EnumValues({"high": Rank.HIGH, "low": Rank.LOW, "master": Rank.MASTER});
 
 class Assets {
   String imageMale;
@@ -277,6 +389,11 @@ class Defense {
       };
 }
 
+enum RankEnum { HIGH, LOW, MASTER }
+
+final rankEnumValues = EnumValues(
+    {"high": RankEnum.HIGH, "low": RankEnum.LOW, "master": RankEnum.MASTER});
+
 class Resistances {
   int fire;
   int water;
@@ -314,33 +431,34 @@ class Resistances {
       };
 }
 
-class Skill {
+class SkillElement {
   int id;
   int level;
-  Modifiers modifiers;
-  String description;
+  FluffyModifiers modifiers;
   int skill;
+  String description;
   String skillName;
 
-  Skill({
+  SkillElement({
     required this.id,
     required this.level,
     required this.modifiers,
-    required this.description,
     required this.skill,
+    required this.description,
     required this.skillName,
   });
 
-  factory Skill.fromRawJson(String str) => Skill.fromJson(json.decode(str));
+  factory SkillElement.fromRawJson(String str) =>
+      SkillElement.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Skill.fromJson(Map<String, dynamic> json) => Skill(
+  factory SkillElement.fromJson(Map<String, dynamic> json) => SkillElement(
         id: json["id"],
         level: json["level"],
-        modifiers: Modifiers.fromJson(json["modifiers"]),
-        description: json["description"],
+        modifiers: FluffyModifiers.fromJson(json["modifiers"]),
         skill: json["skill"],
+        description: json["description"],
         skillName: json["skillName"],
       );
 
@@ -348,13 +466,13 @@ class Skill {
         "id": id,
         "level": level,
         "modifiers": modifiers.toJson(),
-        "description": description,
         "skill": skill,
+        "description": description,
         "skillName": skillName,
       };
 }
 
-class Modifiers {
+class FluffyModifiers {
   int health;
   int attack;
   int affinity;
@@ -371,7 +489,7 @@ class Modifiers {
   int damageIce;
   int resistDragon;
 
-  Modifiers({
+  FluffyModifiers({
     required this.health,
     required this.attack,
     required this.affinity,
@@ -389,12 +507,13 @@ class Modifiers {
     required this.resistDragon,
   });
 
-  factory Modifiers.fromRawJson(String str) =>
-      Modifiers.fromJson(json.decode(str));
+  factory FluffyModifiers.fromRawJson(String str) =>
+      FluffyModifiers.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Modifiers.fromJson(Map<String, dynamic> json) => Modifiers(
+  factory FluffyModifiers.fromJson(Map<String, dynamic> json) =>
+      FluffyModifiers(
         health: json["health"],
         attack: json["attack"],
         affinity: json["affinity"],

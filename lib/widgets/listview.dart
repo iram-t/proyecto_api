@@ -5,8 +5,12 @@ class ListViewMain extends StatelessWidget {
   final List<MonstersResponse> monster;
   final String? type;
   final String? specie;
-  const ListViewMain(
-      {super.key, required this.monster, this.type, this.specie});
+  const ListViewMain({
+    super.key,
+    required this.monster,
+    this.type,
+    this.specie,
+  });
 
   @override
   Widget build(BuildContext context) {

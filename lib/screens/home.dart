@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:proyecto_api/providers/monsters_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:proyecto_api/providers/monster_provider.dart';
 import 'package:proyecto_api/widgets/widgets.dart';
 
-class Home extends StatelessWidget {
+class Home extends ConsumerWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final postMnt = Provider.of<MonstersProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dataMonster = ref.watch(monstersProvider);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -22,24 +22,31 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            Center(
+        body: dataMonster.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, _) => Center(child: Text('Error: $e')),
+          data: (monsters) => TabBarView(
+            children: [
+              Center(
                 child: ListViewMain(
-              monster: postMnt.dataMonster,
-              specie: 'elder dragon',
-            )),
-            Center(
+                  monster: monsters,
+                  specie: 'elder dragon',
+                ),
+              ),
+              Center(
                 child: ListViewMain(
-              monster: postMnt.dataMonster,
-              type: 'large',
-            )),
-            Center(
+                  monster: monsters,
+                  type: 'large',
+                ),
+              ),
+              Center(
                 child: ListViewMain(
-              monster: postMnt.dataMonster,
-              type: 'small',
-            )),
-          ],
+                  monster: monsters,
+                  type: 'small',
+                ),
+              ),
+            ],
+          ),
         ),
         drawer: const DrawerHome(),
       ),

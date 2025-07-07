@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DrawerHome extends StatelessWidget {
@@ -24,11 +23,6 @@ class DrawerHome extends StatelessWidget {
               leading: const Icon(Icons.favorite),
               title: const Text('Favorites'),
               onTap: () => Navigator.pushNamed(context, 'favorites')),
-          ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text('Cerrar sesión'),
-            onTap: () => FirebaseAuth.instance.signOut(),
-          ),
         ],
       ),
     );

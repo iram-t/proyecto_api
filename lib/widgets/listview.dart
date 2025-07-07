@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_api/models/response/monsters_response.dart';
+import 'package:proyecto_api/models/monsters_response.dart';
 
 class ListViewMain extends StatelessWidget {
   final List<MonstersResponse> monster;
   final String? type;
   final String? specie;
-  const ListViewMain(
-      {super.key, required this.monster, this.type, this.specie});
+  const ListViewMain({
+    super.key,
+    required this.monster,
+    this.type,
+    this.specie,
+  });
 
   @override
   Widget build(BuildContext context) {

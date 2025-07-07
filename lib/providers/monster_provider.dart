@@ -20,7 +20,7 @@ class MonstersNotifier extends AsyncNotifier<List<MonstersResponse>> {
   }
 
   Future<List<MonstersResponse>> _fetchMonsters() async {
-    final response = await http.get(Uri.https(_url, '/monsters', {}));
+    final response = await http.get(Uri.https(_url, '/monsters'));
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
       return data.map((item) => MonstersResponse.fromJson(item)).toList();
@@ -29,7 +29,7 @@ class MonstersNotifier extends AsyncNotifier<List<MonstersResponse>> {
   }
 
   Future<MonstersResponse> fetchMonsterById(int id) async {
-    final response = await http.get(Uri.https(_url, '/monsters/$id', {}));
+    final response = await http.get(Uri.https(_url, '/monsters/$id'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return MonstersResponse.fromJson(data);
